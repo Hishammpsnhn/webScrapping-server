@@ -41,7 +41,7 @@ export const getInsight = async (req, res) => {
                     newUrl.save();
                     res.status(201).json(newUrl);
                 } else {
-                    throw new Error("site not found");
+                    res.status(404).json({ message:" error"});
                 }
             });
         }
