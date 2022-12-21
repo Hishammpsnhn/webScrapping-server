@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 // @route   GET /api/url
 // @access  Private
 export const allInsights = async (req, res) => {
+    console.log("allInsights")
     try {
         const allInsights = await urlModal.find().sort({ _id: -1 });
         res.status(200).json(allInsights);
@@ -21,6 +22,7 @@ export const allInsights = async (req, res) => {
 // @route   POST /api/url
 // @access  Private
 export const getInsight = async (req, res) => {
+    console.log("called insigjts")
     const data = req.body;
     try {
         if (data.domain) {
@@ -33,15 +35,16 @@ export const getInsight = async (req, res) => {
                     $("img").each((index, image) => {
                         var img = $(image).attr('src');
                         var baseUrl = url;
-                        var Links = baseUrl + img;
+                        var Links = img;
                         images.push(Links);
                     })
+                    console.log(images)
                     let words = wordCount(html);
                     const newUrl = new urlModal({ ...data, images: images, words: words, createdAt: new Date().toISOString() });
                     newUrl.save();
                     res.status(201).json(newUrl);
                 } else {
-                    res.status(404).json({ message:" error"});
+                    res.status(404).json({ message: " error" });
                 }
             });
         }
