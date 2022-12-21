@@ -36,7 +36,9 @@ export const getInsight = async (req, res) => {
                         var img = $(image).attr('src');
                         var baseUrl = url;
                         var Links = img;
-                        images.push(Links);
+                        if (Links !== undefined) {
+                            images.push(Links);
+                        }
                     })
                     console.log(images)
                     let words = wordCount(html);
